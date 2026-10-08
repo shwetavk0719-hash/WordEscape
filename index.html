@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Word Escape</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         TOP NAVIGATION
+    =============================== -->
+    <header class="topbar">
+
+        <div class="logo">
+            🔐 WORD <span>ESCAPE</span>
+        </div>
+
+        <div class="game-stats">
+
+            <div class="stat">
+                ❤️ <span id="lives">3</span>
+            </div>
+
+            <div class="stat">
+                ⭐ <span id="score">0</span>
+            </div>
+
+            <div class="stat">
+                ⏱️ <span id="timer">60</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+
+    <main>
+
+        <!-- HOME SCREEN -->
+        <section id="homeScreen" class="screen active">
+
+            <div class="home-content">
+
+                <div class="small-title">
+                    🧪 A WORD PUZZLE ADVENTURE
+                </div>
+
+                <h1>
+                    Escape the Lab.<br>
+                    <span>One Word at a Time.</span>
+                </h1>
+
+                <p>
+                    Solve mysterious word puzzles, unlock laboratory rooms
+                    and escape before time runs out.
+                </p>
+
+                <div class="main-buttons">
+
+                    <button id="startButton" class="primary-button">
+                        ▶ Start Game
+                    </button>
+
+                    <button id="howButton" class="secondary-button">
+                        ❓ How to Play
+                    </button>
+
+                </div>
+
+                <div class="features">
+
+                    <span>🧩 Random Words</span>
+                    <span>💡 Hints</span>
+                    <span>🏆 High Score</span>
+                    <span>❤️ Lives</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HOW TO PLAY SCREEN -->
+        <section id="howScreen" class="screen">
+
+            <div class="information-card">
+
+                <button class="back-button" id="backButton">
+                    ← Back
+                </button>
+
+                <div class="small-title">
+                    GAME GUIDE
+                </div>
+
+                <h2>
+                    How to Play
+                </h2>
+
+                <p class="description">
+                    Your mission is to solve the word puzzles and escape
+                    the laboratory.
+                </p>
+
+
+                <div class="instructions">
+
+                    <div class="instruction">
+
+                        <div class="number">
+                            1
+                        </div>
+
+                        <div>
+                            <h3>Read the clue</h3>
+
+                            <p>
+                                Every room gives you a clue.
+                                Think of the word that matches it.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="instruction">
+
+                        <div class="number">
+                            2
+                        </div>
+
+                        <div>
+                            <h3>Type the answer</h3>
+
+                            <p>
+                                Enter your answer in the box and press
+                                Unlock.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="instruction">
+
+                        <div class="number">
+                            3
+                        </div>
+
+                        <div>
+                            <h3>Use hints</h3>
+
+                            <p>
+                                If you are stuck, use a hint.
+                                A hint reveals one letter but costs points.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="instruction">
+
+                        <div class="number">
+                            4
+                        </div>
+
+                        <div>
+                            <h3>Escape!</h3>
+
+                            <p>
+                                Solve all the puzzles before losing
+                                all your lives or running out of time.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXAMPLE -->
+
+                <div class="example-box">
+
+                    <div class="example-label">
+                        EXAMPLE
+                    </div>
+
+                    <h3>
+                        🔎 Clue:
+                        A place where scientists perform experiments.
+                    </h3>
+
+                    <div class="example-answer">
+                        Type:
+                        <strong>LAB</strong>
+                    </div>
+
+                    <p class="correct">
+                        ✓ Correct! The laboratory door opens.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="guideStartButton"
+                    class="primary-button"
+                >
+                    Got it — Start Game
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME SCREEN -->
+        <section id="gameScreen" class="screen">
+
+            <div class="game-container">
+
+
+                <!-- ROOM MAP -->
+
+                <aside class="room-map">
+
+                    <div class="map-title">
+                        LAB MAP
+                    </div>
+
+                    <div id="roomList"></div>
+
+                </aside>
+
+
+                <!-- PUZZLE -->
+
+                <div class="game-card">
+
+                    <div class="progress-information">
+
+                        <span id="roomName">
+                            Reception
+                        </span>
+
+                        <span id="questionNumber">
+                            1 / 12
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div id="progress"></div>
+
+                    </div>
+
+
+                    <div class="puzzle-area">
+
+                        <div class="lock-icon">
+                            🔒
+                        </div>
+
+                        <div
+                            id="category"
+                            class="category"
+                        >
+                            WORD
+                        </div>
+
+                        <h2 id="clue">
+                            Loading puzzle...
+                        </h2>
+
+
+                        <!-- WORD LETTER BOXES -->
+
+                        <div
+                            id="letterBoxes"
+                            class="letter-boxes"
+                        ></div>
+
+
+                        <p
+                            id="feedback"
+                            class="feedback"
+                        >
+                            Enter your answer below.
+                        </p>
+
+                    </div>
+
+
+                    <!-- ANSWER FORM -->
+
+                    <form id="answerForm">
+
+                        <label>
+                            YOUR ANSWER
+                        </label>
+
+                        <div class="answer-row">
+
+                            <input
+                                id="answerInput"
+                                type="text"
+                                autocomplete="off"
+                                spellcheck="false"
+                                placeholder="Type the word..."
+                                maxlength="25"
+                            >
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                Unlock ↵
+                            </button>
+
+                        </div>
+
+                    </form>
+
+
+                    <!-- GAME ACTIONS -->
+
+                    <div class="game-actions">
+
+                        <button
+                            id="hintButton"
+                            class="secondary-button"
+                        >
+                            💡 Hint
+                            <span>(-50)</span>
+                        </button>
+
+                        <button
+                            id="skipButton"
+                            class="secondary-button"
+                        >
+                            ⏭ Skip (-100)
+                        </button>
+
+                        <button
+                            id="quitButton"
+                            class="danger-button"
+                        >
+                            Exit
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULT SCREEN -->
+
+        <section id="resultScreen" class="screen">
+
+            <div class="result-card">
+
+                <div id="resultEmoji" class="result-emoji">
+                    🎉
+                </div>
+
+                <div class="small-title">
+                    MISSION COMPLETE
+                </div>
+
+                <h2 id="resultTitle">
+                    You Escaped!
+                </h2>
+
+                <p id="resultMessage"></p>
+
+
+                <div class="final-statistics">
+
+                    <div>
+                        <span>Score</span>
+                        <strong id="finalScore">
+                            0
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Solved</span>
+                        <strong id="finalSolved">
+                            0
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Best Score</span>
+                        <strong id="bestScore">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="main-buttons">
+
+                    <button
+                        id="playAgainButton"
+                        class="primary-button"
+                    >
+                        🔄 Play Again
+                    </button>
+
+                    <button
+                        id="homeButton"
+                        class="secondary-button"
+                    >
+                        🏠 Main Menu
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- TOAST MESSAGE -->
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
